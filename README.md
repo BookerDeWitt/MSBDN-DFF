@@ -3,7 +3,7 @@ The source code of CVPR 2020 paper **"Multi-Scale Boosted Dehazing Network with 
 
 ## Dependencies
 * Python 3.6
-* PyTorch >= 0.4.0
+* PyTorch >= 1.1.0
 * torchvision
 * numpy
 * skimage
