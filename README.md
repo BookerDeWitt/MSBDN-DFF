@@ -11,7 +11,8 @@ The source code of CVPR 2020 paper **"Multi-Scale Boosted Dehazing Network with 
 * MATLAB
 
 ## Test
-[Pretrained model on RESIDE](https://drive.google.com/open?id=1da13IOlJ3FQfH6Duj_u1exmZzgXPaYXe). 
+[Pretrained model on RESIDE](https://drive.google.com/open?id=1da13IOlJ3FQfH6Duj_u1exmZzgXPaYXe) 
+[Test set](https://drive.google.com/open?id=1qZlnJN4ybjunc2BGh6kjOUfFdVxuNS-P)
 
 ```bash
 MSBDN-DFF/$python test.py --checkpoint pretrained_model_path
