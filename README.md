@@ -19,7 +19,7 @@ The source code of CVPR 2020 paper **"Multi-Scale Boosted Dehazing Network with 
 MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model --dataset
 ```
 
-3.The dehazed images will be saved in the directory of the test set.
+3. The dehazed images will be saved in the directory of the test set.
 
 ## Train
 The training scripts will be coming soon.
