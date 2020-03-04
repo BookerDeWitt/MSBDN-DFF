@@ -11,12 +11,15 @@ The source code of CVPR 2020 paper **"Multi-Scale Boosted Dehazing Network with 
 * MATLAB
 
 ## Test
-[Pretrained model on RESIDE](https://drive.google.com/open?id=1da13IOlJ3FQfH6Duj_u1exmZzgXPaYXe) 
-[Test set](https://drive.google.com/open?id=1qZlnJN4ybjunc2BGh6kjOUfFdVxuNS-P)
+1. Download the [Pretrained model on RESIDE](https://drive.google.com/open?id=1da13IOlJ3FQfH6Duj_u1exmZzgXPaYXe) and
+[Test set](https://drive.google.com/open?id=1qZlnJN4ybjunc2BGh6kjOUfFdVxuNS-P) to  ``MSBDN-DFF/models`` and ``MSBDN-DFF/``folder, respectively.
 
+2. Run the ``MSBDN-DFF/test.py`` with cuda on command line: 
 ```bash
-MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model
+MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model --dataset
 ```
+
+3.The dehazed images will be saved in the directory of the test set.
 
 ## Train
 The training scripts will be coming soon.
