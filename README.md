@@ -16,7 +16,7 @@ The source code of CVPR 2020 paper **"Multi-Scale Boosted Dehazing Network with 
 
 2. Run the ``MSBDN-DFF/test.py`` with cuda on command line: 
 ```bash
-MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model --dataset
+MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model
 ```
 
 3. The dehazed images will be saved in the directory of the test set.
