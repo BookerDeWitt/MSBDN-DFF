@@ -22,7 +22,9 @@ MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model
 3. The dehazed images will be saved in the directory of the test set.
 
 ## Train
-The training scripts will be coming soon.
+We find the choices of training images play an important role during the training stage, so we offer the training data with HDF5 format: 
+[Baidu Yun](https://pan.baidu.com/s/1NqAaec3MFwFU9ZM2lfR_4w) code:v8ku
+
 
 ## Citation
 
