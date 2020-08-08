@@ -24,7 +24,7 @@ MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model
 ## Train
 We find the choices of training images play an important role during the training stage, so we offer the training set of HDF5 format: 
 
-[Baidu Yun](https://pan.baidu.com/s/1NqAaec3MFwFU9ZM2lfR_4w) code:v8ku
+[Baidu Yun](https://pan.baidu.com/s/1NqAaec3MFwFU9ZM2lfR_4w) (code:v8ku)
 
 You can use the DataSet_HDF5() in ./datasets/dataset_hf5.py to load these HDF5 files.
 
