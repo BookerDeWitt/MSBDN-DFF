@@ -24,9 +24,20 @@ MSBDN-DFF/$python test.py --checkpoint path_to_pretrained_model
 ## Train
 We find the choices of training images play an important role during the training stage, so we offer the training set of HDF5 format: 
 
-[Baidu Yun](https://pan.baidu.com/s/1NqAaec3MFwFU9ZM2lfR_4w) (code:v8ku)
+[Baidu Yun](https://pan.baidu.com/s/1NqAaec3MFwFU9ZM2lfR_4w) (Password:v8ku)
 
-You can use the DataSet_HDF5() in ./datasets/dataset_hf5.py to load these HDF5 files.
+1. Download the HDF5 files to path_to_dataset.
+
+2. Run the ``MSBDN-DFF/train.py`` with cuda on command line: 
+```bash
+MSBDN-DFF/$python train.py --dataset path_to_dataset/RESIDE/RESIDE_HDF5_all/ --lr 1e-4 --batchSize 16 --model MSBDN-DFF --name MSBDN-DFF
+```
+
+3.(Optional) We also provide a more effecient model by adopting the Relaxtion Dense Feature Fusion (RDFF) module. More details will be released soon.
+```bash
+MSBDN-DFF/$python train.py --dataset path_to_dataset/RESIDE/RESIDE_HDF5_all/ --lr 1e-4 --batchSize 16 --model MSBDN-RDFF --name MSBDN-RDFF
+```
+
 
 
 ## Citation
