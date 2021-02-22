@@ -51,7 +51,7 @@ By repalcing the **DFF** module with **RDFF** module, the **MSBDN-RDFF** outperf
 If you use these models in your research, please cite:
 
 	@conference{MSBDN-DFF,
-		author = {Hang, Dong and Jinshan, Pan and Zhe, Hu and Xiang, Lei and Fei, Wang and Ming-Hsuan, Yang},
+		author = {Hang, Dong and Jinshan, Pan and Zhe, Hu and Xiang, Lei and Xinyi, Zhang and Fei, Wang and Ming-Hsuan, Yang},
 		title = {Multi-Scale Boosted Dehazing Network with Dense Feature Fusion},
 		booktitle = {CVPR},
 		year = {2020}
