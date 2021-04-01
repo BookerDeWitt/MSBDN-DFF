@@ -30,7 +30,7 @@ We find the choices of training images play an important role during the trainin
 
 2. Run the ``MSBDN-DFF/train.py`` with cuda on command line: 
 ```bash
-MSBDN-DFF/$python train.py --dataset path_to_dataset/RESIDE_HDF5_all/ --lr 1e-4 --batchSize 16 --model MSBDN-DFF --name MSBDN-DFF
+MSBDN-DFF/$python train.py --dataset path_to_dataset/RESIDE_HDF5_all/ --lr 1e-4 --batchSize 16 --model MSBDN-DFF-v1-1 --name MSBDN-DFF
 ```
 
 3.(Optional) We also provide a more advanced model (**MSBDN-RDFF**) by adopting the Relaxtion Dense Feature Fusion (**RDFF**) module. 
