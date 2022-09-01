@@ -15,7 +15,7 @@ from skimage.transform import rescale
 from os.path import join
 from skimage.transform import rotate
 from skimage import img_as_float
-
+        
 #=================== For Testing ===================#
 def is_image_file(filename):
     return any(filename.endswith(extension) for extension in [".png", ".jpg", ".jpeg", "JPG"])

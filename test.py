@@ -27,13 +27,14 @@ import pytorch_ssim
 
 parser = argparse.ArgumentParser(description="PyTorch LapSRN Test")
 parser.add_argument("--scale", default=4, type=int, help="scale factor, Default: 4")
-parser.add_argument("--isTest", type=bool, default=True, help="Test or not")
+parser.add_argument("--is_test", type=bool, default=True, help="Test or not")
 parser.add_argument('--dataset', type=str, default='SOTS', help='Path of the validation dataset')
 parser.add_argument("--checkpoint", default="models/MSBDN-DFF/1/model.pkl", type=str, help="Test on intermediate pkl (default: none)")
 parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
 parser.add_argument('--name', type=str, default='MSBDN', help='filename of the training models')
 parser.add_argument("--start", type=int, default=2, help="Activated gate module")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+parser.add_argument("--inference", action='store_true', help="inference mode")
 
 def get_n_params(model):
     pp=0
@@ -47,6 +48,44 @@ def get_n_params(model):
 def is_pkl(filename):
     return any(filename.endswith(extension) for extension in [".pkl"])
 
+def infer(test_gen, model, SR_dir):
+    med_time = []
+
+    with torch.no_grad():
+        for iteration, batch in enumerate(test_gen, 1):
+            # print(iteration)
+            Blur = batch[0]
+            Blur = Blur.to(device)
+
+            name = batch[1][0].split('.')[0]
+
+            start_time = time.perf_counter()#-------------------------begin to deal with an image's time
+
+            sr = model(Blur)
+
+            #modify
+            try:
+                sr = torch.clamp(sr, min=0, max=1)
+            except:
+                sr = sr[0]
+                sr = torch.clamp(sr, min=0, max=1)
+            torch.cuda.synchronize()#wait for CPU & GPU time syn
+            evalation_time = time.perf_counter() - start_time#---------finish an image
+            med_time.append(evalation_time)
+
+            resultSRDeblur = transforms.ToPILImage()(sr.cpu()[0])
+            resultSRDeblur.save(join(SR_dir, '{0}_{1}.png'.format(name, opt.name)))
+
+            print("Processing {}: TIME:{}".format(iteration, evalation_time))
+
+        median_time = statistics.median(med_time)
+        print(median_time)
+        
+def model_infer(model):
+    model = model.to(device)
+    print(opt)
+    infer(testloader, model, SR_dir)
+    
 def test(test_gen, model, criterion, SR_dir):
     avg_psnr = 0
     avg_ssim = 0
@@ -105,17 +144,21 @@ def model_test(model):
     return psnr
 
 opt = parser.parse_args()
+print(opt)
 device = torch.device('cuda:{}'.format(opt.gpu_ids[0])) if torch.cuda.is_available() else torch.device('cpu')
 str_ids = opt.gpu_ids.split(',')
 torch.cuda.set_device(int(str_ids[0]))
 root_val_dir = opt.dataset# #----------Validation path
 SR_dir = join(root_val_dir, 'Results')  #--------------------------SR results save path
+is_inference = opt.inference
 isexists = os.path.exists(SR_dir)
 if not isexists:
     os.makedirs(SR_dir)
 print("The results of testing images sotre in {}.".format(SR_dir))
 
-testloader = DataLoader(DataValSet(root_val_dir), batch_size=1, shuffle=False, pin_memory=False)
+
+testloader = DataLoader(DataValSet(root_val_dir, isReal=is_inference), batch_size=1, shuffle=False, pin_memory=False)
+
 print("===> Loading model and criterion")
 
 if is_pkl(opt.checkpoint):
@@ -125,7 +168,10 @@ if is_pkl(opt.checkpoint):
         model = torch.load(test_pkl, map_location=lambda storage, loc: storage)
         print(get_n_params(model))
         #model = model.eval()
-        model_test(model)
+        if is_inference:
+            model_infer(model)
+        else:
+            model_test(model)
     else:
         print("It's not a pkl file. Please give a correct pkl folder on command line for example --opt.checkpoint /models/1/GFN_epoch_25.pkl)")
 else:
